@@ -4,7 +4,7 @@
 
 int	chck_exit(char *str)
 {
-	if (!strncmp("exit", str, 4))
+	if (!ft_strncmp("exit", str, 4))
 		if (!str[4])
 			return (0);
 	return (1);
