@@ -6,7 +6,7 @@
 #    By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:39:34 by nlavinia          #+#    #+#              #
-#    Updated: 2022/07/05 21:39:04 by nlavinia         ###   ########.fr        #
+#    Updated: 2022/08/24 13:20:41 by nlavinia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ OBJ_B = $(SRC_B:.c=.o)
 
 HEADER = libft.h
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
