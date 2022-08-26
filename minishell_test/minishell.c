@@ -1,45 +1,40 @@
 #include "minishell.h"
 #include "libft/libft.h"
 
-t_exec	*exec;
+/*t_exec	*exec;
 
 void	exit_on_err(char *msg)
 {
 	ft_putstr_fd(msg, 2);
 	free_all();
 	exit(1);
-}
+}*/
 
-void	free_lst(void)
+void	free_lst(t_lst *lst)
 {
 	t_lst	*tmp;
 
-	while (exec->lst->next != NULL)
+	while (lst != NULL)
 	{
-		tmp = exec->lst->next;
-		free(exec->lst->str);
-		free(exec->lst);
-		exec->lst = tmp;
+		tmp = lst;
+		lst = lst->next;
+		free(tmp->str);
+		free(tmp);
 	}
-	free(exec->lst->str);
-	free(exec->lst);
-	exec->lst = NULL;
 }
-
+/*
 void	free_all(void)
 {
 	t_data	*tmp;
 
-	while (exec->data->next != NULL)
+	while (exec->data != NULL)
 	{
-		tmp = exec->data->next;
-		free(exec->data->cmd);
-		free(exec->data);
-		exec->data = tmp;
+		tmp = exec->data;
+		exec->data = exec->data->next;
+		free(tmp->cmd);
+		free(tmp);
 	}
-	free_lst();
-	free(exec->data->cmd);
-	free(exec->data);
+	free_lst(exec->lst);
 	free(exec->line);
 	free(exec);
 }
@@ -82,19 +77,19 @@ void	init_struct(void)
 	exec = (t_exec *)malloc(sizeof(t_exec));
 	if (!exec)
 		exit_on_err("failed malloc");
-	exec->exit = 0;
+//	exec->exit = 0;
 	exec->line = NULL;
 	exec->lst = NULL;
 	exec->data = init_str_data();
 }
-
+*/
 t_lst	*init_list(void)
 {
 	t_lst	*lst;
 
 	lst = (t_lst *)malloc(sizeof(t_lst));
-	if (!lst)
-		exit_on_err("failed listing");
+/*	if (!lst)
+		exit_on_err("failed listing");*/
 	lst->str = NULL;
 	lst->tok = 0;
 	lst->next = NULL;
@@ -110,16 +105,17 @@ t_lst	*add_lst_node(t_lst *prev)
 	return (new);
 }
 
-void	make_lst(char **wrd_list)
+t_lst	*make_lst(char **wrd_list)
 {
 	char	*content;
+	t_lst	*lst;
 	int		len;
 	int		i;
 	t_lst	*tmp;
 
 	i = 0;
-	exec->lst = init_list();
-	tmp = exec->lst;
+	lst = init_list();
+	tmp = lst;
 	while (wrd_list[i])
 	{
 		printf("word %i: %s\n", i, wrd_list[i]);
@@ -132,16 +128,19 @@ void	make_lst(char **wrd_list)
 		content = malloc(len);
 		if (!content)
 		{
-			free_lst();
-			exit_on_err("failed malloc");
+			free_lst(lst);
+//			exit_on_err("failed malloc");
 		}
 		ft_strlcpy(content, wrd_list[i], len);
 		printf("content: %s\n", content);
 		tmp->str = content;
 		printf("%s\n", tmp->str);
 		i++;
-		tmp->next = add_lst_node(tmp);// one list node too many lol
-		tmp = tmp->next;
+		if (wrd_list[i])
+		{
+			tmp->next = add_lst_node(tmp);// one list node too many lol
+			tmp = tmp->next;
+		}
 	}
 	i = 0;
 	while (wrd_list[i])
@@ -150,38 +149,43 @@ void	make_lst(char **wrd_list)
 		i++;
 	}
 	free(wrd_list);
+	return (lst);
 }
 
-void	lexer_expander(char *line)
+t_lst	*lexer_expander(char *line)
 {
 	char	**wrd_list;
+	t_lst	*lst;
 
 	wrd_list = ft_split(line, ' ');
-	if (!wrd_list)
-		exit_on_err("failed split");
-	make_lst(wrd_list);
+/*	if (!wrd_list)
+		exit_on_err("failed split");*/
+	lst = make_lst(wrd_list);
 //	check_quotes();
 //	check_redrir_pipes();
 //	check_env_vars();
+	return (lst);
 }
 
-void	fill_struct(char *line)
+t_lst	*fill_struct(char *line)
 {
-	t_lst	*tmp;
+	t_lst	*lst;
+	t_lst  	*tmp;
 
-	tmp = exec->lst;
-	lexer_expander(line);
-	if (!ft_strncmp(exec->lst->str, "exit", 4))
+	lst = lexer_expander(line);
+	tmp = lst;
+	if (lst && lst->str)
+		if (!ft_strncmp(lst->str, "exit", 4))
+		{
+			// free_all();
+			exit(0);
+		}
+	while (lst != NULL)
 	{
-		free_all();
-		exit(0);
+		printf("%s, ", lst->str);
+		lst = lst->next;
 	}
-	while (exec->lst->next != NULL)
-	{
-		printf("%s, ", exec->lst->str);
-		exec->lst = exec->lst->next;
-	}
-	printf("%s \n", exec->lst->str);
+	return (tmp);
 }
 /*
 void		do_stuff(t_exec *exec)
@@ -196,18 +200,20 @@ void		do_stuff(t_exec *exec)
 int	main()
 {
 	char	*line;
+	t_lst	*lst;
 
-	init_struct();
+//	init_struct();
 	line = readline(BEGIN(49, 34)"Myshell $> "CLOSE);
 	if (!line)
 		exit(0);
 	while (1)
 	{
 		add_history(line);
-		fill_struct(line);
+		lst = fill_struct(line);
 //		do_stuff(exec);
 //		if (exec->exit != 0)
 //			break ;
+		free_lst(lst);
 		free(line);
 		line = readline(BEGIN(49, 34)"Myshell $> "CLOSE);
 	}

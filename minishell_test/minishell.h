@@ -1,11 +1,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
-
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef union u_arg
 {
@@ -53,7 +52,7 @@ enum e_blt_in
 	EXPORT,
 	UNSET,
 	ENV,
-	EXIT,
+//	EXIT,
 	NO
 };
 
@@ -72,7 +71,7 @@ typedef struct s_data
 typedef struct s_exec
 {
 	char			*line;
-	int				exit;
+//	int				exit;
 	t_lst			*lst;
 	t_data			*data;
 } t_exec;
@@ -82,14 +81,14 @@ typedef struct s_exec
 #define BEGIN(x,y) "\001\033["#x";"#y"m\002"    // x: background, y: foreground
 
 void	exit_on_err(char *msg);
-void	free_lst(void);
+void	free_lst(t_lst *lst);
 void	free_all(void);
 void	init_struct(void);
 t_lst	*init_list(void);
 t_lst	*add_lst_node(t_lst *prev);
-void	make_lst(char **wrd_list);
-void	lexer_expander(char *line);
-void	fill_struct(char *line);
+t_lst	*make_lst(char **wrd_list);
+t_lst	*lexer_expander(char *line);
+t_lst	*fill_struct(char *line);
 
 
 #endif
