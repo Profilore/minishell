@@ -211,6 +211,10 @@ int	main()
 		free(line);
 		line = readline(BEGIN(49, 34)"Myshell $> "CLOSE);
 	}
+
+	rl_clear_history();
+
+
 	free(line);
 	return (0);
 }

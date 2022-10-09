@@ -1,0 +1,28 @@
+./src/builtins.c:		a = ((t_mini *)cmd->content)->full_cmd;
+./src/builtins.c:		if (!cmd->next)
+./src/builtins.c:			printf("!cmd->next\n");
+./src/builtins.c:			printf("cmd->next\n");
+./src/builtins.c:			print_mini(cmd->next);
+./src/builtins.c:		else if (!cmd->next && a && !ft_strncmp(*a, "cd", n) && n == 2)
+./src/builtins.c:		else if (!cmd->next && a && !ft_strncmp(*a, "export", n) && n == 6)
+./src/builtins.c:		else if (!cmd->next && a && !ft_strncmp(*a, "unset", n) && n == 5)
+./src/builtins.c:		cmd = cmd->next;
+./src/builtins.c:	node = cmd->content;
+./src/exec.c:	node = cmd->content;
+./src/exec.c:	else if (cmd->next && dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
+./src/exec.c:		printf("ch_redir if(cmd->next && dup2(fd[WRITE_END])) return mini_perror(DUPERR, NULL, 1)\n");
+./src/exec.c:	n = cmd->content;
+./src/exec.c:	n = cmd->content;
+./src/error.c:	node = cmd->content;
+./src/error.c:	*is_exit = !cmd->next;
+./src/error.c:	node = cmd->content;
+./src/error.c:	*is_exit = !cmd->next;
+./src/get_cmd.c:	n = cmd->content;
+./src/get_cmd.c:	n = cmd->content;
+./src/get_cmd.c:	printf("exec_cmd->get_cmd \n");	
+./src/get_cmd.c:	if (cmd->next && !((t_mini *)cmd->next->content)->infile)
+./src/get_cmd.c:		((t_mini *)cmd->next->content)->infile = fd[READ_END];
+./src/get_cmd.c:	if (((t_mini *)cmd->content)->infile > 2)
+./src/get_cmd.c:		close(((t_mini *)cmd->content)->infile);
+./src/get_cmd.c:	if (((t_mini *)cmd->content)->outfile > 2)
+./src/get_cmd.c:		close(((t_mini *)cmd->content)->outfile);
