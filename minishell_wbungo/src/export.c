@@ -57,19 +57,50 @@ void	print_env(char **a)
 
 	}
 }
+//add string: "declare -x "
+char *add_declare(char *str)
+{
+	char	*newstr;
+	int		len;
 
+//	len = ft_strlen(str);
+//	printf("str_len=%d\n", len);
+	newstr = malloc(ft_strlen("declare -x ") + ft_strlen(str) + 1);
+	if (!newstr)
+		return (NULL);
+	ft_strlcpy(newstr, "declare -x ", (ft_strlen("declare -x ") + 1));
+//	printf("newstr=|%s|\n|", newstr);
+	len = ft_strlen(newstr) + ft_strlen(str) + 1;
+//	printf("new len=%d\n", len);
+	ft_strlcat(newstr, str, len );
+//	printf("newstr=|%s|\n|", newstr);
+//	len = ft_strlen(newstr);
+//	printf("new len=%d\n", len);
+
+	return (newstr);
+}
 //sort env alphabetically & display env with declare -x
 int	sort_display_env(char **a)
 {
-	int	i;
+	int		i;
+	char	**tmp;
+	size_t	strlen;
 
 	i = -1;
+	strlen = 0;
 	if (!a)
 		return (-1);
-	sort(a);
+	tmp = ft_dup_matrix(a);
+	sort(tmp);
 //	print_env(argv);
 	while(a && a[++i])
-		printf("declare -x %s\n", a[i]);
+	{
+//		printf("%s\n", a[i]);
+		strlen = ft_strlen(tmp[i]) + ft_strlen("declare -x ");
+//		printf("sort_display_env strlen=%zu\n", strlen);
+		a[i] = add_declare(tmp[i]);
+		printf("%s\n", a[i]);
+	}
 	return (0);
 }
 
@@ -110,11 +141,13 @@ int	mini_export(t_prompt *prompt)
 		}
 	}
 //debug
+	prompt->declare = ft_dup_matrix(prompt->envp);
 //new function for EXPORT without args
 //to alphabetical sort and then display env	
 	if (!argv[1])
 //		sort_display_env(tmp);
-		sort_display_env(prompt->envp);
+//		sort_display_env(prompt->envp);
+		sort_display_env(prompt->declare);
 	return (0);
 }
 

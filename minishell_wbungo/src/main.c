@@ -76,6 +76,7 @@ static t_prompt	init_prompt(char **argv, char **envp)
 	prompt = init_vars(prompt, str, argv);
 	return (prompt);
 }
+/*
 char *add_newline(char *str)
 {
 	char	*newstr;
@@ -97,6 +98,7 @@ char *add_newline(char *str)
 
 	return (newstr);
 }
+*/
 
 int	main(int argc, char **argv, char **envp)
 {

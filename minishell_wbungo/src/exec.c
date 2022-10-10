@@ -45,7 +45,7 @@ void	child_builtin(t_prompt *prompt, t_mini *n, int l, t_list *cmd)
 	else if (is_builtin(n) && n->full_cmd && \
 		!ft_strncmp(*n->full_cmd, "export", l) && l == 6)
 	{
-		ft_putmatrix_fd(prompt->envp, 1, 1);
+		ft_putmatrix_fd(prompt->declare, 1, 1);
 		g_status = 0;
 	}
 }

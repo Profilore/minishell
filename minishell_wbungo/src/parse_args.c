@@ -103,22 +103,22 @@ static void	*parse_args(char **args, t_prompt *p)
 	p->cmds = fill_nodes(split_all(args, p), -1);
 	if (!p->cmds)
 //debug
-	{
-		printf("!p->cmds\n");
+//	{
+//		printf("!p->cmds\n");
 		return (p);
-	}
+//	}
 	i = ft_lstsize(p->cmds);
-	printf("parse_args->builtin\n");
+//	printf("parse_args->builtin\n");
 	g_status = builtin(p, p->cmds, &is_exit, 0);
 //debug
-	printf("parse_args g_status 1=%d\n", g_status);	
-	printf("is_exit_0=%d\n", is_exit);
+//	printf("parse_args g_status 1=%d\n", g_status);	
+//	printf("is_exit_0=%d\n", is_exit);
 	while (i-- > 0)
 	{
-		printf("waitpid starts getpid=%d\n", getpid());
+//		printf("waitpid starts getpid=%d\n", getpid());
 		waitpid(-1, &g_status, 0);
-		printf("waitpid returns getpid=%d\n", getpid());
-		printf("waitpid g_status=%d\n", g_status);	
+//		printf("waitpid returns getpid=%d\n", getpid());
+//		printf("waitpid g_status=%d\n", g_status);	
 	}
 	printf("g_status 0=%d\n", g_status);
 	printf("WIFEXITED(g_status)=%d\n",WIFEXITED(g_status));
@@ -131,40 +131,50 @@ static void	*parse_args(char **args, t_prompt *p)
 	
 	if (!is_exit && g_status == 13)
 		g_status = 0;
-	if (!is_exit && g_status == 126)
-	{
-		g_status = 126;
-		return (0);
-	}
+//	if (!is_exit && g_status == 126)
+//	{
+//		g_status = 126;
+//		return (0);
+//	}
+//	if (!is_exit && g_status == 127)
+//	{
+//		g_status = 127;
+//		return (0);
+//	}
 	if (!is_exit && WIFSIGNALED(g_status) && WTERMSIG(g_status))
 	{
-			printf("!is exit WIFSIGNALED =%d\n", is_exit);
+//			printf("!is exit WIFSIGNALED =%d\n", is_exit);
 			g_status = 128 + WTERMSIG(g_status);
-			printf("if WIFSIGNALED g_status=\t%d\n", g_status);
-			printf("parse_argse returns p\n");
+//			printf("if WIFSIGNALED g_status=\t%d\n", g_status);
+//			printf("parse_argse returns p\n");
 			return (p);
 	}
-	printf("is_exit_2=%d\n", is_exit);
+	if (!is_exit && WTERMSIG(g_status))
+	{
+		g_status = WTERMSIG(g_status);
+		return (p);
+	}
+//	printf("is_exit_2=%d\n", is_exit);
 //debug
 //	if (args)
 //		printf("parse_args args\n");
 	if (is_exit && WIFSIGNALED(g_status))
 		g_status = return_exit_status(g_status);
-	printf("return exit g_status = %d\n", g_status);
+//	printf("return exit g_status = %d\n", g_status);
 //	if (is_exit && g_status > 255)
 //		g_status = g_status / 255;
-	printf("is_exit_3=%d\n", is_exit);
+//	printf("is_exit_3=%d\n", is_exit);
 	if (args && is_exit)
 	{
 		ft_lstclear(&p->cmds, free_content);
-		printf("recalculated minishell g_status=%d\n", g_status);	
-		printf("return NULL\n");
+//		printf("recalculated minishell g_status=%d\n", g_status);	
+//		printf("return NULL\n");
 		return (NULL);
 	}
-	printf("WSTOPSIG(g_status)=%d\n",WSTOPSIG(g_status));
+//	printf("WSTOPSIG(g_status)=%d\n",WSTOPSIG(g_status));
 	g_status = WSTOPSIG(g_status);
-	printf("recalculated minishell g_status=%d\n", g_status);	
-	printf("return p\n");
+//	printf("recalculated minishell g_status=%d\n", g_status);	
+//	printf("return p\n");
 	return (p);
 }
 

@@ -32,6 +32,7 @@ typedef struct s_prompt
 {
 	t_list	*cmds;
 	char	**envp;
+	char	**declare;
 	pid_t	pid;
 }			t_prompt;
 

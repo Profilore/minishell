@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 15:08:07 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/05/12 17:37:52 by aperez-b         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
@@ -42,13 +31,14 @@ void	print_mini(void *mini)
 int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 {
 //debug	
-	printf("builtin\n");
+//	printf("builtin\n");
 	char	**a;
 
 	while (cmd)
 	{
 		a = ((t_mini *)cmd->content)->full_cmd;
 //debug
+/*
 		printf("builtin a[0]=%s\n", a[0]);
 		if (!cmd->next)
 			printf("!cmd->next\n");
@@ -57,8 +47,7 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 			printf("cmd->next\n");
 			print_mini(cmd->next);
 		}
-			
-//		
+*/			
 		n = 0;
 		if (a)
 			n = ft_strlen(*a);
@@ -75,8 +64,8 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
 //debug
-			printf("builtin->exec_cmd\n");
-			printf("a[0]=%s\n", a[0]);
+//			printf("builtin->exec_cmd\n");
+//			printf("a[0]=%s\n", a[0]);
 			exec_cmd(prompt, cmd);
 		}
 		cmd = cmd->next;
