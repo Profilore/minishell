@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 11:36:47 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/03/14 16:05:14 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/11/09 11:36:47 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:31:45 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,36 +67,6 @@ int	ft_atoi2(const char *nptr, long *nbr)
 	*nbr *= sign;
 	return (0);
 }
-/*
-int	mini_exit(t_list *cmd, int *is_exit)
-{
-	t_mini	*node;
-	long	status[2];
-
-	node = cmd->content;
-	*is_exit = !cmd->next;
-	if (*is_exit)
-		ft_putstr_fd("exit\n", 2);
-	if (!node->full_cmd || !node->full_cmd[1])
-		return (0);
-	status[1] = ft_atoi2(node->full_cmd[1], &status[0]);
-	if (status[1] == -1)
-	{
-		ft_putstr_fd("minishell: exit: ", 2);
-		ft_putstr_fd(node->full_cmd[1], 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
-		return (255);
-	}
-	else if (node->full_cmd[2])
-	{
-		*is_exit = 0;
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		return (1);
-	}
-	status[0] %= 256 + 256 * (status[0] < 0);
-	return (status[0]);
-}
-*/
 
 int	mini_exit(t_list *cmd, int *is_exit)
 {
@@ -111,9 +81,6 @@ int	mini_exit(t_list *cmd, int *is_exit)
 	if (!node->full_cmd || !node->full_cmd[1])
 		return (0);
 	status_1 = ft_atoll(node->full_cmd[1], &status_0);
-//debug
-	printf("status_0=%ld\n", status_0);	
-	printf("status_1=%lld\n", status_1);	
 	if (status_1 == -1)
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
@@ -128,7 +95,6 @@ int	mini_exit(t_list *cmd, int *is_exit)
 		return (1);
 	}
 	status_0 %= 256 + 256 * (status_0 < 0);
-	printf("return status_0=%ld\n", status_0);	
 	return (status_0);
 }
 

@@ -1,45 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/22 15:08:07 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:36:51 by nlavinia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 extern int	g_status;
 
-//debug_func
-/*
-void	print_a(char **a)
-{
-	int	i;
-
-	i = -1;
-	while(a && a[++i])
-	{
-		printf("a[%d]=\t%s\n", i, a[i]);
-	}
-}
-*/
-
 void	print_mini(void *mini)
 {
 	t_mini	*a;
 	
-	printf("mini\n");
 	a = ((t_mini *)mini);
-//	print_a(a->full_cmd);
 	printf("a->full_path=%s\n", a->full_path);
 }
 
 
 int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 {
-//debug	
-//	printf("builtin\n");
 	char	**a;
 
 	while (cmd)
 	{
 		a = ((t_mini *)cmd->content)->full_cmd;
-//debug
-/*
-		printf("builtin a[0]=%s\n", a[0]);
 		if (!cmd->next)
 			printf("!cmd->next\n");
 		else
@@ -47,7 +37,6 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 			printf("cmd->next\n");
 			print_mini(cmd->next);
 		}
-*/			
 		n = 0;
 		if (a)
 			n = ft_strlen(*a);
@@ -63,9 +52,6 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 		{
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
-//debug
-//			printf("builtin->exec_cmd\n");
-//			printf("a[0]=%s\n", a[0]);
 			exec_cmd(prompt, cmd);
 		}
 		cmd = cmd->next;

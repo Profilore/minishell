@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/13 18:53:59 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/11/14 14:20:01 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/11/13 18:53:59 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:32:50 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	update_output(char ***matrix, int fd)
 
 void	exec_custom(char ***out, char *full, char *args, char **envp)
 {
-//debug
-//	printf("exec_custom\n");	
 	pid_t	pid;
 	int		fd[2];
 	char	**matrix;
@@ -51,11 +49,7 @@ void	exec_custom(char ***out, char *full, char *args, char **envp)
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 		close(fd[WRITE_END]);
 		if (!access(full, F_OK))
-//debug
-//		{
-//			printf("execve\n");			
 			execve(full, matrix, envp);
-//		}
 		exit (1);
 	}
 	close(fd[WRITE_END]);

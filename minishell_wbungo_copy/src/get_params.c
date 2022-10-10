@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 19:48:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/03/07 21:21:29 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/11/04 19:48:14 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:13:28 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	if (access(path, F_OK) == -1 && !flags[0])
 		mini_perror(NDIR, path, 127);
 	else if (!flags[0] && access(path, R_OK) == -1)
-//debug change 126 to 0		
 		mini_perror(NPERM, path, 126);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
-//debug change 126 to 0		
 		mini_perror(NPERM, path, 126);
 	if (flags[0] && flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
@@ -132,8 +130,6 @@ t_mini	*get_infile2(t_mini *node, char **args, int *i)
 	{
 		aux[0] = args[*i];
 		node->infile = get_here_doc(str, aux);
-		if (node->infile)
-			printf("get_infile2 node->infile=%d\n", node->infile);
 	}
 	if (!args[*i] || node->infile == -1)
 	{
@@ -144,8 +140,5 @@ t_mini	*get_infile2(t_mini *node, char **args, int *i)
 			g_status = 2;
 		}
 	}
-//debug	
-	if (node)
-		printf("get_infile2 node\n");
 	return (node);
 }

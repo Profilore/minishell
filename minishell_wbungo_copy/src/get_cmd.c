@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 15:51:24 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/03/07 21:27:00 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/11/21 15:51:24 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:17:23 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path)
 		*s = ft_split(path, ':');
 		free(path);
 		n->full_path = find_command(*s, *n->full_cmd, n->full_path);
-//debug
-		printf("cmd_checks n->full_path=%s\n", n->full_path);
-
 		if (!n->full_path || !n->full_cmd[0] || !n->full_cmd[0][0])
 			mini_perror(NCMD, *n->full_cmd, 127);
 	}
@@ -75,18 +72,11 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 {
 	t_mini	*n;
 	DIR		*dir;
-//debug
-	printf("get_cmd starts\n");
-	n = cmd->content;
-//debug
-	printf("get_cmd -> cmd_checks\n");
 
+	n = cmd->content;
 	dir = cmd_checks(prompt, cmd, &s, path);
-//debug
 	int is_built;
 	is_built = is_builtin(n);
-	printf("get_cmd is_built=%d\n", is_built);
-
 	if (!is_builtin(n) && n && n->full_cmd && dir)
 		mini_perror(IS_DIR, *n->full_cmd, 126);
 	else if (!is_builtin(n) && n && n->full_path && \
@@ -101,26 +91,14 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 }
 
 void	*exec_cmd(t_prompt *prompt, t_list *cmd)
-{
-//debug
-	printf("exec_cmd starts\n");	
+{	
 	int		fd[2];
 
-//debug
-	printf("exec_cmd->get_cmd \n");	
 	get_cmd(prompt, cmd, NULL, NULL);
 	if (pipe(fd) == -1)
-	{
-		printf("exec_cmd return (mini_perror(PIPERR, NULL, 1))\n");
 		return (mini_perror(PIPERR, NULL, 1));
-	}
-//debug
-	printf("exec_cmd -> check_to_fork\n");
 	if (!check_to_fork(prompt, cmd, fd))
-	{
-		printf("exec_cmd !check_to_fork(prompt, cmd, fd)\n");
 		return (NULL);
-	}
 	close(fd[WRITE_END]);
 	if (cmd->next && !((t_mini *)cmd->next->content)->infile)
 		((t_mini *)cmd->next->content)->infile = fd[READ_END];
@@ -130,6 +108,5 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd)
 		close(((t_mini *)cmd->content)->infile);
 	if (((t_mini *)cmd->content)->outfile > 2)
 		close(((t_mini *)cmd->content)->outfile);
-	printf("exec_cmd just return finish NULL\n");
 	return (NULL);
 }

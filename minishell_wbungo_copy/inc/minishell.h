@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 15:08:50 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/03/14 16:05:19 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/10/22 15:08:50 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:46:10 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_prompt
 {
 	t_list	*cmds;
 	char	**envp;
-	char	**declare;
 	pid_t	pid;
 }			t_prompt;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 17:28:02 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/03/07 23:32:44 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/11/09 17:28:02 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:32:19 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**mini_setenv(char *var, char *value, char **envp, int n)
 	free(aux[1]);
 	return (envp);
 }
-///*
+
 static int	var_in_envp(char *argv, char **envp, int ij[2])
 {
 	int	pos;
@@ -77,34 +77,6 @@ static int	var_in_envp(char *argv, char **envp, int ij[2])
 	}
 	return (0);
 }
-
-/*
-int	mini_export(t_prompt *prompt)
-{
-	int		ij[2];
-	int		pos;
-	char	**argv;
-
-	argv = ((t_mini *)prompt->cmds->content)->full_cmd;
-	if (ft_matrixlen(argv) >= 2)
-	{
-		ij[0] = 1;
-		while (argv[ij[0]])
-		{
-			pos = var_in_envp(argv[ij[0]], prompt->envp, ij);
-			if (pos == 1)
-			{
-				free(prompt->envp[ij[1]]);
-				prompt->envp[ij[1]] = ft_strdup(argv[ij[0]]);
-			}
-			else if (!pos)
-				prompt->envp = ft_extend_matrix(prompt->envp, argv[ij[0]]);
-			ij[0]++;
-		}
-	}
-	return (0);
-}
-*/
 
 int	mini_unset(t_prompt *prompt)
 {

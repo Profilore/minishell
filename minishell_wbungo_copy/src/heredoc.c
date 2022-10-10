@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 10:17:00 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/03/14 17:19:55 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/11/09 10:17:00 by nlavinia          #+#    #+#             */
+/*   Updated: 2022/10/10 14:10:28 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ extern int	g_status;
 
 char	*get_here_str(char *str[2], size_t len, char *limit, char *warn)
 {
-//debug	
-	printf("get_here_str starts");
-	
 	char	*temp;
 
 	while (g_status != 1 && (!str[0] || ft_strncmp(str[0], limit, len) \
