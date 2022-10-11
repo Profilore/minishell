@@ -6,7 +6,7 @@
 #    By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 13:38:18 by nlavinia          #+#    #+#              #
-#    Updated: 2022/10/10 23:40:29 by nlavinia         ###   ########.fr        #
+#    Updated: 2022/10/11 14:43:11 by nlavinia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ endif
 
 # Make variables
 AR = ar rcs
-CFLAGS = -Wall -Wextra -Werror -MD -g3 
+CFLAGS = -Wall -Wextra -Werror -MD -g3 -g
 RM = rm -f
 CC = gcc
 PRINTF = LC_NUMERIC="en_US.UTF-8" printf
