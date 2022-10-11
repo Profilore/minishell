@@ -6,7 +6,7 @@
 /*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 15:51:24 by nlavinia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:17:23 by nlavinia         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:28:55 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 
 	n = cmd->content;
 	dir = cmd_checks(prompt, cmd, &s, path);
-	int is_built;
-	is_built = is_builtin(n);
 	if (!is_builtin(n) && n && n->full_cmd && dir)
 		mini_perror(IS_DIR, *n->full_cmd, 126);
 	else if (!is_builtin(n) && n && n->full_path && \

@@ -6,7 +6,7 @@
 /*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 18:49:29 by nlavinia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:30:10 by nlavinia         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:02:10 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 {
 	t_mini	*n;
 	DIR		*dir;
+	int		is_built;
+	int		acces;
 
 	n = cmd->content;
 	dir = NULL;
@@ -105,8 +107,6 @@ void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 		dir = opendir(*n->full_cmd);
 	if (n->infile == -1 || n->outfile == -1)
 		return (NULL);
-	int is_built;
-	int acces;
 	is_built = is_builtin(n);
 	acces = access(n->full_path, X_OK);
 	if ((n->full_path && acces == 0) || is_built)

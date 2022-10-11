@@ -6,7 +6,7 @@
 /*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:40:47 by nlavinia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:08:11 by nlavinia         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:02:59 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,13 @@ static t_prompt	init_prompt(char **argv, char **envp)
 	return (prompt);
 }
 
-char *add_newline(char *str)
+char	*add_newline(char *str)
 {
 	char	*newstr;
-	int		len;
 
-	len = ft_strlen(str);
 	newstr = malloc(ft_strlen(str) + 2);
-	len = ft_strlen(newstr);
 	ft_strlcpy(newstr, str, (ft_strlen(str) + 1));
-	len = ft_strlen(newstr);
 	ft_strlcat(newstr, "\n", (ft_strlen(newstr) + 2));
-	len = ft_strlen(newstr);
 	return (newstr);
 }
 

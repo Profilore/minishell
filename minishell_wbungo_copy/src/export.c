@@ -6,7 +6,7 @@
 /*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:17:55 by nlavinia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:23:09 by nlavinia         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:04:52 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_env(char **a)
 	int	i;
 
 	i = -1;
-	while(a && a[++i])
+	while (a && a[++i])
 		ft_putmatrix_fd(a, 1, 1);
 }
 
@@ -73,7 +73,7 @@ int	sort_display_env(char **a)
 	if (!a)
 		return (-1);
 	sort(a);
-	while(a && a[++i])
+	while (a && a[++i])
 		printf("declare -x %s\n", a[i]);
 	return (0);
 }
@@ -105,4 +105,3 @@ int	mini_export(t_prompt *prompt)
 		sort_display_env(prompt->envp);
 	return (0);
 }
-

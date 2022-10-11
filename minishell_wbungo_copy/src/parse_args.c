@@ -6,7 +6,7 @@
 /*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 12:08:12 by nlavinia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:06:01 by nlavinia         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:09:16 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ int	return_exit_status(int ex_return)
 	return (ex_return);
 }
 
-
 static void	*parse_args(char **args, t_prompt *p)
 {
 	int	is_exit;
-	int	i;
 
 	is_exit = 0;
 	p->cmds = fill_nodes(split_all(args, p), -1);
 	if (!p->cmds)
 		return (p);
-	i = ft_lstsize(p->cmds);
 	g_status = builtin(p, p->cmds, &is_exit, 0);
 	if (!is_exit && g_status == 13)
 		g_status = 0;
@@ -63,8 +60,8 @@ static void	*parse_args(char **args, t_prompt *p)
 	}
 	if (!is_exit && WIFSIGNALED(g_status) && WTERMSIG(g_status))
 	{
-			g_status = 128 + WTERMSIG(g_status);
-			return (p);
+		g_status = 128 + WTERMSIG(g_status);
+		return (p);
 	}
 	if (is_exit && WIFSIGNALED(g_status))
 		g_status = return_exit_status(g_status);

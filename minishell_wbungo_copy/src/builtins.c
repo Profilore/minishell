@@ -6,7 +6,7 @@
 /*   By: nlavinia <nlavinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:08:07 by nlavinia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:36:51 by nlavinia         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:57:59 by nlavinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern int	g_status;
 
+/*
 void	print_mini(void *mini)
 {
 	t_mini	*a;
@@ -21,7 +22,7 @@ void	print_mini(void *mini)
 	a = ((t_mini *)mini);
 	printf("a->full_path=%s\n", a->full_path);
 }
-
+*/
 
 int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 {
@@ -30,13 +31,6 @@ int	builtin(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 	while (cmd)
 	{
 		a = ((t_mini *)cmd->content)->full_cmd;
-		if (!cmd->next)
-			printf("!cmd->next\n");
-		else
-		{
-			printf("cmd->next\n");
-			print_mini(cmd->next);
-		}
 		n = 0;
 		if (a)
 			n = ft_strlen(*a);
