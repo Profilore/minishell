@@ -112,8 +112,8 @@ int	mini_exit(t_list *cmd, int *is_exit)
 		return (0);
 	status_1 = ft_atoll(node->full_cmd[1], &status_0);
 //debug
-	printf("status_0=%ld\n", status_0);	
-	printf("status_1=%lld\n", status_1);	
+//	printf("status_0=%ld\n", status_0);	
+//	printf("status_1=%lld\n", status_1);	
 	if (status_1 == -1)
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
@@ -128,7 +128,7 @@ int	mini_exit(t_list *cmd, int *is_exit)
 		return (1);
 	}
 	status_0 %= 256 + 256 * (status_0 < 0);
-	printf("return status_0=%ld\n", status_0);	
+//	printf("return status_0=%ld\n", status_0);	
 	return (status_0);
 }
 

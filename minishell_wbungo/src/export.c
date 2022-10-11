@@ -114,7 +114,7 @@ int	mini_export(t_prompt *prompt)
 
 	argv = ((t_mini *)prompt->cmds->content)->full_cmd;
 //debug	
-	printf("mini_export_starts\n");
+//	printf("mini_export_starts\n");
 //	print_a(argv);
 //	matrixlen = ft_matrixlen(argv);
 //	printf("matrixlen=\t%d\n", matrixlen);

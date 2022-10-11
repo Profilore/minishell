@@ -63,7 +63,7 @@ static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path)
 		free(path);
 		n->full_path = find_command(*s, *n->full_cmd, n->full_path);
 //debug
-		printf("cmd_checks n->full_path=%s\n", n->full_path);
+//		printf("cmd_checks n->full_path=%s\n", n->full_path);
 
 		if (!n->full_path || !n->full_cmd[0] || !n->full_cmd[0][0])
 			mini_perror(NCMD, *n->full_cmd, 127);
@@ -76,16 +76,16 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 	t_mini	*n;
 	DIR		*dir;
 //debug
-	printf("get_cmd starts\n");
+//	printf("get_cmd starts\n");
 	n = cmd->content;
 //debug
-	printf("get_cmd -> cmd_checks\n");
+//	printf("get_cmd -> cmd_checks\n");
 
 	dir = cmd_checks(prompt, cmd, &s, path);
 //debug
 	int is_built;
 	is_built = is_builtin(n);
-	printf("get_cmd is_built=%d\n", is_built);
+//	printf("get_cmd is_built=%d\n", is_built);
 
 	if (!is_builtin(n) && n && n->full_cmd && dir)
 		mini_perror(IS_DIR, *n->full_cmd, 126);
@@ -103,22 +103,22 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 void	*exec_cmd(t_prompt *prompt, t_list *cmd)
 {
 //debug
-	printf("exec_cmd starts\n");	
+//	printf("exec_cmd starts\n");	
 	int		fd[2];
 
 //debug
-	printf("exec_cmd->get_cmd \n");	
+//	printf("exec_cmd->get_cmd \n");	
 	get_cmd(prompt, cmd, NULL, NULL);
 	if (pipe(fd) == -1)
 	{
-		printf("exec_cmd return (mini_perror(PIPERR, NULL, 1))\n");
+//		printf("exec_cmd return (mini_perror(PIPERR, NULL, 1))\n");
 		return (mini_perror(PIPERR, NULL, 1));
 	}
 //debug
-	printf("exec_cmd -> check_to_fork\n");
+//	printf("exec_cmd -> check_to_fork\n");
 	if (!check_to_fork(prompt, cmd, fd))
 	{
-		printf("exec_cmd !check_to_fork(prompt, cmd, fd)\n");
+//		printf("exec_cmd !check_to_fork(prompt, cmd, fd)\n");
 		return (NULL);
 	}
 	close(fd[WRITE_END]);
@@ -130,6 +130,6 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd)
 		close(((t_mini *)cmd->content)->infile);
 	if (((t_mini *)cmd->content)->outfile > 2)
 		close(((t_mini *)cmd->content)->outfile);
-	printf("exec_cmd just return finish NULL\n");
+//	printf("exec_cmd just return finish NULL\n");
 	return (NULL);
 }

@@ -29,7 +29,7 @@ static t_mini	*mini_init(void)
 static t_mini	*get_params(t_mini *node, char **a[2], int *i)
 {
 //debug
-	printf("get_params starts\n");
+//	printf("get_params starts\n");
 //	printf("*a[0]=%s\n", *a[0]);	
 //	printf("*a[1]=%s\n", *a[1]);
 //	printf("*i=%d\n", *i);	
@@ -46,14 +46,15 @@ static t_mini	*get_params(t_mini *node, char **a[2], int *i)
 			node = get_infile1(node, a[1], i);
 		else if (a[0][*i][0] != '|')
 		{
-			printf("get_params a[0][*i][0] != '|' =%c\n", a[0][*i][0]);
+//			printf("get_params a[0][*i][0] != '|' =%c\n", a[0][*i][0]);
 			node->full_cmd = ft_extend_matrix(node->full_cmd, a[1][*i]);
-			printf("get_params node->full_cmd[0]=%s\n", node->full_cmd[0]);
+/*
+		   printf("get_params node->full_cmd[0]=%s\n", node->full_cmd[0]);
 			if (node->full_cmd[1])
 				printf("get_params node->full_cmd[1]=%s\n", node->full_cmd[1]);
 			else
 				printf("get_params node->full_cmd[1] !=\n");
-				
+*/				
 		}
 		else
 		{
